@@ -6,9 +6,9 @@ os.chdir('/Users/dmo62/Downloads')
 #print(os.getcwd())
 
 invoiceNumbers = []
-invoicelist = []
+invoicelistdict = {}
 
-pdfFileObj = open('', 'rb')
+pdfFileObj = open('sigma913-915.pdf', 'rb')
 pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 
 parts = []
@@ -34,12 +34,41 @@ for pageNumber in range(pdfReader.getNumPages()):
             invoiceNum, *otherInfo = line.split()   
     invoiceNumbers.append(invoiceNum)
 
+pageNumberList = []
+
 for pageNumber, invoiceNum in enumerate(invoiceNumbers, start = 1):
-    if invoiceNum not in invoicelist:
-        invoicelist.append(invoiceNum)
-    else:
-        continue
-    print(pageNumber, invoiceNum)
+    pageNumberList.append(pageNumber)
+
+# print(pageNumberList)
+# print(invoiceNumbers)
+
+d = dict(zip(pageNumberList, invoiceNumbers))
+
+#print(d)
+
+temp = []
+res = dict()
+for key, val in d.items():
+    if val not in temp:
+        temp.append(val)
+        res[key] = val
+
+print(res)
+
+
+# print(invoicelist)
+
+# def Convert(a):
+#     it = iter(a)
+#     res_dct = dict(zip(it, it))
+#     return res_dct
+         
+# # Driver code
+# invoiceNumbers = ['a', 1, 'b', 2, 'c', 3]
+# print(Convert(lst))
+
+
+    
 
 
     
